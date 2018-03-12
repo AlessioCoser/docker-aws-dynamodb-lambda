@@ -25,7 +25,7 @@ npm install
 
 3. Install Database fixtures
 ```
-bash ./db/setup.sh http://dynamodb:8000
+bash ./scripts/db-setup.sh http://dynamodb:8000
 ```
 
 4. Start application

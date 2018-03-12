@@ -11,10 +11,8 @@ services:
       context: .
     ports:
       - '3000:3000'
-    environment:
-      AWS_ACCESS_KEY_ID: asd
-      AWS_SECRET_ACCESS_KEY: asd
-      AWS_REGION: eu-west-1
+    env_file:
+      - .env
     volumes:
       - '.:/home/ec2user'
     entrypoint: /bin/bash
