@@ -7,22 +7,22 @@ custom:
   env:
     development:
       DB_TABLE: users-develop
-      ACCESS_KEY_ID: asd
-      SECRET_ACCESS_KEY: asd
-      REGION: eu-west-1
+      ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
+      SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
+      REGION: ${env:AWS_REGION}
       ENDPOINT: http://dynamodb:8000
 
     staging:
       DB_TABLE: users-staging
-      ACCESS_KEY_ID: asd
-      SECRET_ACCESS_KEY: asd
-      REGION: eu-west-1
+      ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
+      SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
+      REGION: ${env:AWS_REGION}
 
     production:
       DB_TABLE: users
-      ACCESS_KEY_ID: asd
-      SECRET_ACCESS_KEY: asd
-      REGION: eu-west-1
+      ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
+      SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
+      REGION: ${env:AWS_REGION}
 
 provider:
   name: aws
