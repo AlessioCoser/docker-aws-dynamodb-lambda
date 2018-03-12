@@ -20,12 +20,27 @@ docker-compose exec lambda bash
 
 2. Install dependences
 ```
-npm install
+$ npm install
 ```
 
-3. Start application
+### Start application
 ```
-npm start
+$ npm start
+```
+
+### Stop Application
+```
+$ npm stop
+```
+
+### Restart Application
+```
+$ npm restart
+```
+
+### Exit from Container
+```
+$ exit
 ```
 
 ### Stop local stack
