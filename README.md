@@ -23,12 +23,7 @@ docker-compose exec lambda bash
 npm install
 ```
 
-3. Install Database fixtures
-```
-bash ./scripts/db-setup.sh http://dynamodb:8000
-```
-
-4. Start application
+3. Start application
 ```
 npm start
 ```

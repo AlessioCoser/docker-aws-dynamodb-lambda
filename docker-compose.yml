@@ -16,6 +16,7 @@ services:
     volumes:
       - '.:/home/ec2user'
     entrypoint: /bin/bash
+    command: ["/home/ec2user/scripts/db-setup.sh", "http://dynamodb:8000"]
     tty: true
     depends_on:
       - dynamodb

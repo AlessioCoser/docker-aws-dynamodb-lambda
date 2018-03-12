@@ -31,3 +31,5 @@ aws dynamodb put-item \
 #   --table-name users-develop \
 #   --key 'email=my@email.local' \
 #   --endpoint-url ${DYNAMO_ENDPOINT}
+
+exec /bin/bash
