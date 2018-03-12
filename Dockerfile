@@ -10,8 +10,12 @@ RUN yum install -y git && \
 RUN curl -k  "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" && \
   python get-pip.py && \
   pip install awscli && \
+  pip install awslogs && \
   rm get-pip.py
-RUN pip install awslogs
+
+RUN mkdir -p /root/.aws && \
+    echo "[default]\\naws_access_key_id=${AWS_ACCESS_KEY_ID}\\naws_secret_access_key=${AWS_SECRET_ACCESS_KEY}" > /root/.aws/credentials && \
+    echo "[default]\\noutput=json\\nregion=${AWS_REGION}" > /root/.aws/config
 
 RUN curl -k --silent https://nodejs.org/dist/v6.10.3/node-v6.10.3-linux-x64.tar.gz | tar --strip-components 1 -xzf - -C /usr/local/
 RUN npm install -g serverless@1.26.1

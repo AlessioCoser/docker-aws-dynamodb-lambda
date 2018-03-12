@@ -1,10 +1,15 @@
 'use strict'
 
-module.exports.api = (event, context) => {
-  let response = {
-    statusCode: 200,
-    body: '{"response": "ok"}'
-  }
+const UserRepository = require('./lib/user-repository')
 
-  return context.succeed(response)
+module.exports.api = (event, context) => {
+  let userRepository = new UserRepository()
+
+  return userRepository.get('my@email.local')
+  .then((item) => {
+    return context.succeed({ statusCode: 200, body: JSON.stringify(item) })
+  })
+  .catch((err) => {
+    return context.succeed({ statusCode: 500, body: '{"error": "' + err + '"}' })
+  })
 }

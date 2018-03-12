@@ -3,12 +3,18 @@ version: '3'
 services:
   dynamodb:
     image: deangiberson/aws-dynamodb-local
+    ports:
+      - '8000:8000'
 
   lambda:
     build:
       context: .
     ports:
-      - '8000:3000'
+      - '3000:3000'
+    environment:
+      AWS_ACCESS_KEY_ID: asd
+      AWS_SECRET_ACCESS_KEY: asd
+      AWS_REGION: eu-west-1
     volumes:
       - '.:/home/ec2user'
     entrypoint: /bin/bash
