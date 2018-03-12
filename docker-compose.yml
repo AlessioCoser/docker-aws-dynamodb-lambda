@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  dynamodb:
+    image: deangiberson/aws-dynamodb-local
+
+  lambda:
+    build:
+      context: .
+    ports:
+      - '8000:3000'
+    volumes:
+      - '.:/home/ec2user'
+    entrypoint: /bin/bash
+    tty: true
+    depends_on:
+      - dynamodb
