@@ -6,12 +6,22 @@
 
 ## Setup
 
-### Start local stack
+**NB:** Copy the `.env.template` into a `.env` file in the main folder and fill credentials from your AWS IAM profile.
+
+(If you don't have credentials you can insert random strings for local development)
+
+### Use Local stack
+Start
 ```
 docker-compose up -d
 ```
 
-### Connect and setup
+Stop
+```
+docker-compose down
+```
+
+### Developmente Environment
 
 1. connect into local environment
 ```
@@ -23,27 +33,10 @@ docker-compose exec lambda bash
 $ npm install
 ```
 
-### Start application
+3. Application
 ```
 $ npm start
-```
-
-### Stop Application
-```
 $ npm stop
 ```
 
-### Restart Application
-```
-$ npm restart
-```
-
-### Exit from Container
-```
-$ exit
-```
-
-### Stop local stack
-```
-docker-compose down
-```
+After each code editing you can execute `npm restart` in order to have the latest version of code running
