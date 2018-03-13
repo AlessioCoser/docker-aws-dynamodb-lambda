@@ -1,15 +1,25 @@
 'use strict'
 
 const UserRepository = require('./lib/user-repository')
+const responses = require('./lib/responses')
 
 module.exports.api = (event, context) => {
-  let userRepository = new UserRepository()
+  if (!event.queryStringParameters || !event.queryStringParameters.email) {
+    return context.succeed(responses.badRequest)
+  }
 
-  return userRepository.get('my@email.local')
+  let email = event.queryStringParameters.email
+
+  return new UserRepository().get(email)
   .then((item) => {
-    return context.succeed({ statusCode: 200, body: JSON.stringify(item) })
+    if (!item) {
+      return context.succeed(responses.notFound)
+    }
+
+    return context.succeed(responses.success(item))
   })
   .catch((err) => {
-    return context.succeed({ statusCode: 500, body: '{"error": "' + err + '"}' })
+    console.error(err)
+    return context.succeed(responses.fatalError)
   })
 }
