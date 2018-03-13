@@ -21,7 +21,7 @@ Stop
 docker-compose down
 ```
 
-### Developmente Environment
+### Development Environment
 
 1. connect into local environment
 ```
