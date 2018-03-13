@@ -7,27 +7,21 @@ custom:
   env:
     development:
       DB_TABLE: users-develop
-      ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
-      SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
-      REGION: ${env:AWS_REGION}
+      AWS_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${env:AWS_REGION}
       DYNAMO_LOCAL_ENDPOINT: ${env:DYNAMO_LOCAL_ENDPOINT}
 
     staging:
       DB_TABLE: users-staging
-      ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
-      SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
-      REGION: ${env:AWS_REGION}
 
     production:
       DB_TABLE: users
-      ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
-      SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
-      REGION: ${env:AWS_REGION}
 
 provider:
   name: aws
   runtime: nodejs6.10
-  region: eu-west-1
+  region: ${env:AWS_REGION}
   environment: ${self:custom.env.${opt:stage}}
   timeout: 60
 
@@ -39,3 +33,34 @@ functions:
           path: users/{email}
           method: get
           cors: '*'
+
+resources:
+  Resources:
+    DynamoDbTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.env.${opt:stage}.DB_TABLE}
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    DynamoDBIamPolicy:
+      Type: AWS::IAM::Policy
+      DependsOn: DynamoDbTable
+      Properties:
+        PolicyName: lambda-dynamodb
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - dynamodb:GetItem
+                - dynamodb:PutItem
+              Resource: arn:aws:dynamodb:*:*:table/${self:custom.env.${opt:stage}.DB_TABLE}
+        Roles:
+          - Ref: IamRoleLambdaExecution
