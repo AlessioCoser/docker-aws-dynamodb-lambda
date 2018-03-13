@@ -1,7 +1,7 @@
 {
-  "name": "docker-lambda",
+  "name": "docker-aws-dynamodb-lambda",
   "version": "1.0.0",
-  "description": "## Requirements",
+  "description": "A Project Bootstrap for local development with AWS DynamoDb Local and AWS Lambda",
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,5 +15,13 @@
   },
   "dependencies": {
     "aws-sdk": "^2.207.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlessioCoser/docker-aws-dynamodb-lambda.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AlessioCoser/docker-aws-dynamodb-lambda/issues"
+  },
+  "homepage": "https://github.com/AlessioCoser/docker-aws-dynamodb-lambda#readme"
 }

@@ -1,4 +1,5 @@
-# AWS Lambda with DynamoDB
+# AWS Lambda with DynamoDB in a Local Docker Stack
+A Project Bootstrap for local development with AWS DynamoDb Local and AWS Lambda
 
 ## Requirements
 
