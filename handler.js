@@ -3,12 +3,12 @@
 const UserRepository = require('./lib/user-repository')
 const responses = require('./lib/responses')
 
-module.exports.api = (event, context) => {
-  if (!event.queryStringParameters || !event.queryStringParameters.email) {
-    return context.succeed(responses.badRequest)
-  }
+function getEmailFrom (pathParameters) {
+  return decodeURIComponent(pathParameters.email)
+}
 
-  let email = event.queryStringParameters.email
+module.exports.api = (event, context) => {
+  let email = getEmailFrom(event.pathParameters)
 
   return new UserRepository().get(email)
   .then((item) => {
