@@ -10,7 +10,7 @@ custom:
       ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID}
       SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY}
       REGION: ${env:AWS_REGION}
-      ENDPOINT: http://dynamodb:8000
+      DYNAMO_LOCAL_ENDPOINT: ${env:DYNAMO_LOCAL_ENDPOINT}
 
     staging:
       DB_TABLE: users-staging
